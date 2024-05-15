@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; 
+  }
+  
+  .table {
+    width: 50%;
+    max-width: 500px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #77b2e1; 
+  }
+  

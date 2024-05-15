@@ -36,30 +36,30 @@ export class AppComponent implements OnInit {
   }
 
 
-  addProduct() {
+  addUser() {
     if (this.userForm.valid) {
       if (this.isEditMode) {
         this.api.updateUser(this.currentUserId!, this.userForm.value).subscribe({
           next: (res) => {
-            alert('Product updated successfully');
+            // alert('updated successfully');
             this.userForm.reset();
             this.isEditMode = false;
             this.currentUserId = null;
             this.getAllUserForm();
           },
           error: () => {
-            alert('Error while updating the product');
+            // alert('Error updating');
           }
         });
       } else {
         this.api.postUser(this.userForm.value).subscribe({
           next: (res) => {
-            alert('Product added successfully');
+            // alert('added successfully');
             this.userForm.reset();
             this.getAllUserForm();
           },
           error: () => {
-            alert('Error while adding the product');
+            // alert('Error adding');
           }
         });
       }
@@ -80,12 +80,12 @@ export class AppComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       error: (err) => {
-        alert('Error while fetching the records!!');
+        // alert('Error while fetching the records!!');
       }
     });
   }
 
-  editProduct(row: any) {
+  editUser(row: any) {
     this.isEditMode = true;
     this.currentUserId = row.id;
     this.userForm.patchValue(row);

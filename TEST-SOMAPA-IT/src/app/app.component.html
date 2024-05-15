@@ -1,0 +1,82 @@
+<div class="container ">
+  <form [formGroup]="userForm" (ngSubmit)="addProduct()">
+    <div class="row">
+      <mat-form-field appearance="outline" style="padding: 20px;">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstname">
+          <mat-error *ngIf="userForm.controls['firstname'].errors?.['required']">First name is required</mat-error>
+        </mat-form-field>
+      <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastname">
+          <mat-error *ngIf="userForm.controls['lastname'].errors?.['required']">Last name is required</mat-error>  
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" style="padding: 20px;">
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender" matNativeControl required>
+          <mat-option value="M">Male</mat-option>
+          <mat-option value="F">Female</mat-option>
+          <mat-option value="U">Unknown</mat-option>
+        </mat-select>
+        <mat-error *ngIf="userForm.controls['gender'].errors?.['required']">Gender is required</mat-error>  
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+          <mat-label>Score</mat-label>
+          <input matInput formControlName="score">
+      </mat-form-field>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <button mat-raised-button color="primary" type="submit" style="margin-right: 10px;">
+        {{ isEditMode ? 'Edit' : 'Add' }}
+      </button>
+      <button mat-raised-button type="button" (click)="removeUser()">
+        Cancel
+      </button>
+    </div>
+  </form>
+<div></div>
+  <table mat-table [dataSource]="dataSource" matSort style="overflow: auto;"  style="margin-top: 10px;">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="editProduct(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+      <!-- <td mat-cell *matCellDef="let element"> {{element.gender}} </td> -->
+      <td mat-cell *matCellDef="let element" [matTooltip]="getGenderTooltip(element.gender)">
+        {{ getGenderTooltip(element.gender) }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="score">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
+      <td mat-cell *matCellDef="let element"> {{element.score | number:'1.2-2'}} </td>
+    </ng-container>
+
+    
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

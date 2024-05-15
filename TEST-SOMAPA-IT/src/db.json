@@ -41,13 +41,6 @@
       "lastname": "Bates",
       "gender": "F",
       "score": 74.5
-    },
-    {
-      "firstname": "to",
-      "lastname": "we",
-      "gender": "M",
-      "score": "12",
-      "id": 7
     }
   ]
 }
